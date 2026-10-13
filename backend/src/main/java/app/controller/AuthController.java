@@ -25,13 +25,13 @@ public class AuthController {
     public String loginPage() {
         return "login";
     }
-
-    // Register a new user
     @PostMapping("/register")
-    public String registerUser(@RequestBody User user) {
-        return service.register(user);
-    }
+public String registerUser(@RequestBody User user) {
+    return service.register(user);
+}
 
+   
+    
     // Login an existing user
     @PostMapping("/login")
     public String loginUser(@RequestBody User user) {
