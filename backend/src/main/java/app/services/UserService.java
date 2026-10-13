@@ -1,3 +1,4 @@
+
 package app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +11,21 @@ import app.repo.UserRepo;
 public class UserService {
 
     @Autowired
-    UserRepo repo;
+    private UserRepo repo;
 
     public String register(User user) {
-    repo.save(user);
-    return "Registration Successful";
-}
+        repo.save(user);
+        return "Registration Successful";
+    }
 
     public String login(User user) {
         User dbUser = repo.findById(user.getEmail()).orElse(null);
 
-        if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
+        if (dbUser != null
+                && dbUser.getPassword().equals(user.getPassword())) {
             return "Login Successful";
         }
+
         return "Invalid Email or Password";
     }
-}  
+}
