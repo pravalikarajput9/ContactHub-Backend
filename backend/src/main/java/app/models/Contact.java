@@ -1,4 +1,3 @@
-
 package app.models;
 
 import jakarta.persistence.*;
@@ -11,20 +10,29 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String name;
+
+    @Column(length = 150)
     private String email;
+
+    @Column(length = 20)
     private String phone;
+
+    @Column(length = 255)
     private String address;
 
     @Column(length = 1000)
     private String notes;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 254)
     private String ownerEmail;
 
+    // Default constructor required by JPA
     public Contact() {
     }
 
+    // Parameterized constructor
     public Contact(String name, String email, String phone,
                    String address, String notes, String ownerEmail) {
         this.name = name;

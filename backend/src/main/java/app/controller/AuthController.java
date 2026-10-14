@@ -22,18 +22,27 @@ public class AuthController {
         this.service = service;
     }
 
+    // Check whether the registration API is running
     @GetMapping("/register")
     public ResponseEntity<String> registerPage() {
-        return ResponseEntity.ok("ContactHub registration API is running");
+        return ResponseEntity.ok(
+            "ContactHub registration API is running"
+        );
     }
 
+    // Check whether the login API is running
     @GetMapping("/login")
     public ResponseEntity<String> loginPage() {
-        return ResponseEntity.ok("ContactHub login API is running");
+        return ResponseEntity.ok(
+            "ContactHub login API is running"
+        );
     }
 
+    // Register a new user
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(
+            @RequestBody User user) {
+
         String result = service.register(user);
 
         if ("Registration Successful".equals(result)) {
@@ -43,8 +52,11 @@ public class AuthController {
         return ResponseEntity.badRequest().body(result);
     }
 
+    // Log in an existing user
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
+    public ResponseEntity<String> loginUser(
+            @RequestBody User user) {
+
         String result = service.login(user);
 
         if ("Login Successful".equals(result)) {
