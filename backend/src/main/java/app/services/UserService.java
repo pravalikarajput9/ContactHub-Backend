@@ -1,18 +1,19 @@
 package app.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import app.models.User;
 import app.repo.UserRepo;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepo repo;
+    private final UserRepo repo;
 
-    // Register a user
+    public UserService(UserRepo repo) {
+        this.repo = repo;
+    }
+
     public String register(User user) {
         if (user == null
                 || user.getEmail() == null
@@ -22,23 +23,28 @@ public class UserService {
             return "Email and password are required";
         }
 
-        if (repo.existsById(user.getEmail())) {
-            return "Email already registered";
+        String email = user.getEmail().trim().toLowerCase();
+
+        if (repo.existsById(email)) {
+            return "Email is already registered";
         }
 
+        user.setEmail(email);
         repo.save(user);
+
         return "Registration Successful";
     }
 
-    // Login a user
     public String login(User user) {
         if (user == null
                 || user.getEmail() == null
                 || user.getPassword() == null) {
-            return "Invalid Email or Password";
+            return "Email and password are required";
         }
 
-        User dbUser = repo.findById(user.getEmail()).orElse(null);
+        String email = user.getEmail().trim().toLowerCase();
+
+        User dbUser = repo.findById(email).orElse(null);
 
         if (dbUser != null
                 && dbUser.getPassword() != null

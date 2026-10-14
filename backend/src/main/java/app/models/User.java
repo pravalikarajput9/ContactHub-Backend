@@ -1,5 +1,6 @@
 package app.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -9,19 +10,18 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
+    @Column(nullable = false, unique = true)
     private String email;
 
-    private String name;
+    @Column(nullable = false)
     private String password;
 
-    public User() {}
-
-    public String getName() {
-        return name;
+    public User() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -39,4 +39,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-} 
+}
