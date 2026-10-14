@@ -19,21 +19,25 @@ public class AuthController {
     @Autowired
     private UserService service;
 
+    // Open Register Endpoint
     @GetMapping("/register")
     public String registerPage() {
         return "register";
     }
 
+    // Open Login Endpoint
     @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
 
+    // Register User
     @PostMapping("/register")
     public String registerUser(@RequestBody User user) {
         return service.register(user);
     }
 
+    // Login User
     @PostMapping("/login")
     public String loginUser(@RequestBody User user) {
         return service.login(user);
