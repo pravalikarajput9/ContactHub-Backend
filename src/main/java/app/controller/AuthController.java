@@ -1,10 +1,14 @@
-```java
+
 package app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import app.models.User;
 import app.services.UserService;
@@ -17,7 +21,6 @@ public class AuthController {
     @Autowired
     private UserService service;
 
-    // Register a new user
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         String result = service.register(user);
@@ -26,11 +29,9 @@ public class AuthController {
             return ResponseEntity.ok(result);
         }
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(result);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
 
-    // Login an existing user
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody User user) {
         String result = service.login(user);
@@ -39,8 +40,7 @@ public class AuthController {
             return ResponseEntity.ok(result);
         }
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(result);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
     }
 }
-```
+
