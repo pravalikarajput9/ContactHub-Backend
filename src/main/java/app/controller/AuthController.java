@@ -29,7 +29,7 @@ public class AuthController {
     // Register User
     @PostMapping("/register")
     public String registerUser(@RequestBody User user) {
-        service.registerUser(user);
+        service.register(user);
         return "User registered successfully";
     }
 }
